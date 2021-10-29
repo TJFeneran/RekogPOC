@@ -1,0 +1,176 @@
+
+ body {
+  background-color: #EEEEEE;
+ }
+ 
+ .box-title {
+	 color: #777777;
+	 font-size: 1.275rem;
+	 padding-bottom: 5px;
+ }
+ 
+ .dm-uploader.upload-select-active {
+  	  border-color: red;
+  	  border-style: solid;
+  }
+ .dm-uploader {
+	cursor: default;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	/*border: 0.25rem dashed #A5A5C7;*/
+  	text-align: center;
+}
+
+.dm-uploader .btn {
+	position: relative;
+	overflow: hidden;
+}
+
+.dm-uploader .btn input[type="file"] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	border: solid transparent;
+	width: 100%;
+	opacity: .0;
+	filter: alpha(opacity= 0);
+	cursor: pointer;
+}
+
+  .bd-placeholder-img {
+    overflow: hidden;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+  
+  .bd-placeholder-img img {
+      margin: 0 auto;
+      display: block;
+      height: 225px;
+      width: auto;
+      box-shadow: 0px 0px 4px #999999;
+  }
+  
+  .statusbar {
+      height: 2px;
+  }
+  
+  #test-container {
+	  background-color: #F8F8F8;
+	  border-radius: 15px;
+	  padding: 15px 0;
+	  border: 1px solid #E6E6E6;
+  }
+  
+  #info-deletecollection{
+	  background-color: #F8F8F8;
+	  border-radius: 15px;
+	  padding: 15px;
+	  border: 1px solid #E6E6E6;
+	  display: none;
+  }
+  
+  #uploader-container {
+	  background-color: #F8F8F8;
+	  border-radius: 15px;
+	  padding: 10px 0 15px;
+	  border: 1px solid #E6E6E6;
+  }
+  
+  #info-details {
+	  background-color: #F8F8F8;
+	  border-radius: 15px;
+	  display: none;
+	  padding: 10px;
+	  border: 1px solid #E6E6E6;
+  }
+  .info-title {
+	  font-size: 1rem;
+	  font-weight: bold;
+	  color: #444444;
+  }
+  .info-value {
+	  font-size: 0.875rem;
+	  color: #666666;
+	  padding-bottom: 10px;
+  }
+  
+  .status-bad {
+      background-color: #FF0000;
+  }
+  .status-good {
+      background-color: #00CF00;
+  }
+  .status-active {
+      background-color: #ffff14;
+  }
+  
+  #loader {
+      font-size: 4rem;
+  }
+  	#loader i {
+  		margin: 20px auto 0;
+  	}
+  
+  #empty-collection {
+      display: none;
+      text-align: center;
+  }
+  
+  .card input {
+      color: #888888;
+      padding-left: 5px;
+      width: 100%;
+  }
+  
+  .top-icons i {
+	  opacity: 0.5;
+	  cursor: pointer;
+	  font-size: 1.725rem;
+  }
+
+  i.top-refresh {
+      
+  }
+  	i.top-refresh:hover {
+	  	color: #21A121;
+  	}
+  i.top-info {
+	  margin-right: 25px;
+  }
+  	i.top-info:hover {
+	  	color: #006FFF;
+  	}
+  i.top-test {
+	  margin-right: 25px;
+  }
+  	i.top-test:hover {
+	  	color: #7510BC;
+  	}	
+  i.top-upload {
+	  margin-right: 25px;
+  }
+  	i.top-upload:hover {
+	  	color: #DB3BF3;
+  	}
+  i.top-deletecollection {
+	  margin-right: 25px;
+  }
+  	i.top-deletecollection:hover {
+	  	color: #F50000;
+  	}
+  	  
+  .d-flex i {
+      cursor: pointer;
+  }

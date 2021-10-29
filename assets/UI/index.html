@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Custom Face Collection</title>
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+		<link rel="stylesheet" href="app.css">
+	</head>
+	<body>
+		
+		<main role="main">
+			
+			<div class="album py-3">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-8 float-left">
+							<h1>Custom Face Collection</h1>
+						</div>
+						<div class="col-sm-4 float-right text-right top-icons">
+							<i class="top-deletecollection fas fa-trash"></i>
+							<i class="top-info fas fa-info-circle"></i>
+							<i class="top-upload fas fa-upload"></i>
+							<i class="top-refresh fas fa-sync-alt"></i>
+						</div>
+					</div>
+					<div class="row my-3 mx-2 clearfix" id="info-deletecollection">
+						<div class="col-sm-12">
+							<h4>Reset Custom Face Collections</h4>
+							<div style='margin:20px 0;'>
+								Are you sure you want to reset all custom face collections? This cannot be undone, and will clear all face collections in this region in your account.
+							</div>
+							<button type="button" class="btn btn-danger float-right" id="delete-collection">Delete Collections</button>
+						</div>
+					</div>
+					<div class="row my-3 mx-2" id="info-details" >
+						<div class="col-sm-12">
+							<div class='info-title'>Interface URL</div>
+							<div class='info-value' id="info-uiurl"></div>
+							<div class='info-title'>S3 Training Bucket</div>
+							<div class='info-value' id="info-s3sourcebucket"></div>
+							<div class='info-title'>API Endpoint</div>
+							<div class='info-value' id="info-apiurl"></div>
+							<div class='info-title'>AWS Region</div>
+							<div class='info-value' id="info-region"></div>
+							<div class='info-title'>Collection ID</div>
+							<div class='info-value' id="info-value">rekog-custom-collection (hardcoded in Lambda functions)</div>
+						</div>
+					</div>
+					<div class="row my-3 mx-2" id="uploader-container" style='display:none;'>
+						<div class="col-sm-12">
+							<div class='box-title'>Upload Images</div>
+						</div>
+						<div class="col-sm-12 col-md-6">
+							<div id="drag-and-drop-zone" class="dm-uploader p-5">
+								<h3 style='color:#555555;'>Drag and Drop Image(s) Here<h3/>
+								<div class="btn btn-primary btn-block mt-5">
+					                <span>Select Images(s)...</span>
+					                <input type="file" title='Click to add Files' />
+					            </div>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6" style='height:230px;overflow-y:scroll;'>
+							<div class="card h-100">
+								<div class="card-header">
+									Image List
+								</div>
+								<ul class="list-unstyled p-2 d-flex flex-column col" id="files">
+									<li class="text-muted text-center empty">No images uploaded.</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-sm-12" style='margin: 10px 0 0 5px;font-size:0.75rem;color:#555555;'>
+							Note: .jpg or .png (4mb or less). After uploading, wait a few seconds and refresh your collection to see your new images.<br/>
+							One face per image. Medium-sized face-on headshot with good lighting is ideal.  
+						</div>
+					</div>
+					<div class="row py-5" id="loader"><i class="fas fa-spinner fa-spin"></i></div>
+					<div class="row py-5" id="empty-collection">
+						<div class="col-sm-12">
+							<h2>Your collection is empty.</h2>
+							<br/>
+							<a href="#" id="empty_refresh">Refresh</a>
+						</div>
+					</div>
+					<div class="row py-5" id="face-holder"></div> <!-- /row -->
+				</div>
+			</div>	
+		</main>
+		
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+		<script src="dm-uploader.js"></script>
+		<script src="app.js"></script>
+		<!-- File item template -->
+	    <script type="text/html" id="files-template">
+	      <li class="media">
+	        <div class="media-body mb-1">
+	          <p class="mb-2">
+	            <strong>%%filename%%</strong> - Status: <span class="text-muted">Waiting</span>
+	          </p>
+	          <div class="progress mb-2">
+	            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" 
+	              role="progressbar"
+	              style="width: 0%" 
+	              aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+	            </div>
+	          </div>
+	          <hr class="mt-1 mb-1" />
+	        </div>
+	      </li>
+	    </script>
+	</body>
+</html>
